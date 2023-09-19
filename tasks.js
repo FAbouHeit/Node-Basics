@@ -39,6 +39,8 @@ function onDataReceived(text) {
   }
   else if(text === 'hello\n'){
     hello();
+  }else if(text === 'hola\n'){
+    hola();
   }
   else{
     unknownCommand(text);
@@ -68,6 +70,11 @@ function hello(){
 }
 
 
+function hola(){
+  console.log('hola espanol amigo!')
+}
+
+
 /**
  * Exits the application
  *
@@ -79,4 +86,4 @@ function quit(){
 }
 
 // The following line starts the application
-startApp("Jad Sarout")
+startApp("Fuad Abou Heit")
