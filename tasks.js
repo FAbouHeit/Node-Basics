@@ -41,6 +41,8 @@ function onDataReceived(text) {
     hello();
   }else if(text === 'hola\n'){
     hola();
+  } else if(text === 'help\n'){
+    listCommands();
   }
   else{
     unknownCommand(text);
@@ -59,6 +61,11 @@ function unknownCommand(c){
   console.log('unknown command: "'+c.trim()+'"')
 }
 
+
+
+function listCommands(){
+  console.log(" 'hello'\n 'hola' \n 'quit' or 'exit'");
+}
 
 /**
  * Says hello
