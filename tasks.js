@@ -61,8 +61,9 @@ function unknownCommand(c){
   console.log('unknown command: "'+c.trim()+'"')
 }
 
-
-
+/**
+*prints the list of possible commands
+*/
 function listCommands(){
   console.log(" 'hello'\n 'hola' \n 'quit' or 'exit'");
 }
@@ -76,7 +77,9 @@ function hello(){
   console.log('hello!')
 }
 
-
+/**
+ * says hola
+ */
 function hola(){
   console.log('hola espanol amigo!')
 }
