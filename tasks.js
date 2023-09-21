@@ -180,8 +180,10 @@ function remove(num){
 
   if(num == 0){
       myList.pop();
+      checkMyList.pop();
   } else if(num){
     myList.splice(num-1,1)
+    checkMyList.splice(num-1,1)
   }
 }
 
