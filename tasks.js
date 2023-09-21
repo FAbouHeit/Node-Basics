@@ -35,6 +35,7 @@ function startApp(name){
  */
 
 let myList = []
+let checkMyList = []
 
 function onDataReceived(text) {
   
@@ -135,10 +136,16 @@ function hola(){
 function list(){
   // console.log(myList)
   let index = 1;
+  let check = ""
   if(myList.length !=0){
 
       for(let i = 0; i<myList.length; i++){
-        console.log(`${index}- ${myList[i]}`)
+        if(checkMyList[i]==false){
+          check = " "
+        } else {
+          check = "✓"
+        }
+        console.log(`${index}- [${check}] ${myList[i]}`)
         index++;
       }
 
@@ -152,6 +159,7 @@ function add(task){
     return console.log("Error: please add a task properly: add(task)")
   }
   myList.push(task);
+  checkMyList.push(false)
 }
 
 function remove(num){
