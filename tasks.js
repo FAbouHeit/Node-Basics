@@ -83,6 +83,16 @@ function onDataReceived(text) {
   else if(text === 'edit\n' || name[0]==='edit' ){
     if (isNaN(secondword) ) {secondword=0;}
     edit(secondword, editText);
+  }else if(text === 'check\n' || name[0]==='check'){
+    if(isNaN(secondword)){
+      secondword = 0;
+    }
+    check(secondword);
+  }else if(text === 'uncheck\n' || name[0]==='uncheck'){
+    if(isNaN(secondword)){
+      secondword = 0;
+    }
+    uncheck(secondword);
   }
   else{
     unknownCommand(text);
@@ -198,6 +208,22 @@ function edit(number, text){
   }
 }
 
+function check(num){
+  if(num>myList.length || num <1){
+    console.log("error checking the task...")
+  } else {
+    checkMyList[num-1] = true;
+  }
+}
+
+
+function uncheck(num){
+  if(num>myList.length || num <1){
+    console.log("error unchecking the task...")
+  } else {
+    checkMyList[num-1] = false;
+  }
+}
 
 
 /**
