@@ -139,14 +139,17 @@ function add(task){
 
 function remove(num){
 
+  if (num <0 || num > myList.length) {
+    console.log(`${num} does not exist! Try again...`)
+  } else{
+
   if(num == 0){
-   
       myList.pop();
-      
-    
   } else if(num){
     myList.splice(num-1,1)
   }
+}
+
 }
 
 
