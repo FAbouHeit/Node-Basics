@@ -1,3 +1,4 @@
+// import { argv } from 'node:process';
 
 /**
  * Starts the application
@@ -9,6 +10,38 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
+
+
+let filedata = 'database.json'
+const process = require('process');
+const fs = require('fs');
+  
+var args = process.argv;
+if(args[2]){
+filedata = args[2]
+// console.log(filedata)
+}
+
+
+let emptyarr =[]
+let newdata= JSON.stringify(emptyarr)
+
+if(fs.existsSync(filedata)){
+  console.log(filedata)
+} else {
+  // console.log("doesnt exist")
+  fs.appendFile(filedata, newdata,function (err) {
+    if (err) throw err;
+    // console.log('Saved!');
+  })
+
+}
+   
+
+
+
+
+
 async function startApp(name){
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
@@ -18,13 +51,16 @@ async function startApp(name){
 
 
   const fs = require('fs')
+  // console.log(filedata)
+
   // const arrayloaded = JSON.stringify()
   try{
-  await fs.readFile('database.json',{encoding: "utf-8"}, (error, loadedString)=>{
+  await fs.readFile(filedata,{encoding: "utf-8"}, (error, loadedString)=>{
     myList = JSON.parse(loadedString)
     // console.log(myList)
   })
   } catch(error){
+    
     console.log("error loading data", error)
   }
 }
@@ -263,7 +299,7 @@ async function quit(){
   const fs = require('fs').promises;
 
   try{
-  await fs.writeFile('database.json', data,{encoding : 'utf-8'});
+  await fs.writeFile(filedata, data,{encoding : 'utf-8'});
       console.log("saved")
   }catch(error){
       console.log("not saved")
@@ -273,6 +309,12 @@ async function quit(){
   console.log('Quitting now, goodbye!')
   process.exit();
 }
+
+
+
+
+
+
 
 // The following line starts the application
 startApp("Fuad Abou Heit")
