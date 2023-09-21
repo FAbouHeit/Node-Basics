@@ -87,7 +87,7 @@ function unknownCommand(c){
 *prints the list of possible commands
 */
 function listCommands(){
-  console.log(" 'hello (optional name)'\n 'hola' \n 'quit' or 'exit'");
+  console.log(" \n 'hello (optional: name)'\n 'list'\n 'remove (optional: number)'\n 'add (required: task name)'\n 'hola' \n 'quit' or 'exit'");
 }
 
 /**
