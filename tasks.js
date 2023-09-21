@@ -43,6 +43,19 @@ function onDataReceived(text) {
   //  console.log(name)
   let secondword = name[1];
   // console.log(secondword)
+  let editText = []
+  if( isNaN(secondword) && (name[0]== 'edit' || name[0]== 'edit\n')){
+    
+    for(let i=1; i<name.length;i++){
+      editText.push(name[i])
+    } 
+    // console.log(secondword, editText)
+  } else if(!isNaN(secondword) && (name[0]== 'edit' || name[0]== 'edit\n')){
+    for(let i=2; i<name.length;i++){
+      editText.push(name[i])
+    } 
+    // console.log(secondword, editText)
+  }
   
 
 // console.log(name)
@@ -66,6 +79,10 @@ function onDataReceived(text) {
     secondword=0}
     remove(parseInt(secondword));
   }
+  else if(text === 'edit\n' || name[0]==='edit' ){
+    if (isNaN(secondword) ) {secondword=0;}
+    edit(secondword, editText);
+  }
   else{
     unknownCommand(text);
   }
@@ -87,7 +104,7 @@ function unknownCommand(c){
 *prints the list of possible commands
 */
 function listCommands(){
-  console.log(" \n 'hello (optional: name)'\n 'list'\n 'remove (optional: number)'\n 'add (required: task name)'\n 'hola' \n 'quit' or 'exit'");
+  console.log(" \n 'hello (optional: name)'\n 'list'\n 'remove (optional: number)'\n 'add (required: task name)'\n 'edit (optional: number) (required: text)'\n 'hola' \n 'quit' or 'exit'");
 }
 
 /**
@@ -150,6 +167,27 @@ function remove(num){
   }
 }
 
+}
+
+
+function edit(number, text){
+  // console.log("your reached the edit! wohooo" + number + text)
+  let mynewtext = ""
+  if(number==0 && text){
+    for(let i =0; i<text.length; i++){
+      mynewtext += text[i]
+      mynewtext += ' '
+    }
+    myList[myList.length-1] = mynewtext;
+  } else if(number && text){
+    for(let i =0; i<text.length; i++){
+      mynewtext += text[i]
+      mynewtext += ' '
+    }
+    myList[number-1] = mynewtext;
+  } else {
+    console.log("check your inputs")
+  }
 }
 
 
