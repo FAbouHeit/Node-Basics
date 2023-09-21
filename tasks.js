@@ -9,12 +9,24 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-function startApp(name){
+async function startApp(name){
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', onDataReceived);
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
+
+
+  const fs = require('fs')
+  // const arrayloaded = JSON.stringify()
+  try{
+  await fs.readFile('database.json',{encoding: "utf-8"}, (error, loadedString)=>{
+    myList = JSON.parse(loadedString)
+    // console.log(myList)
+  })
+  } catch(error){
+    console.log("error loading data", error)
+  }
 }
 
 
@@ -154,7 +166,7 @@ function list(){
   if(myList.length !=0){
 
       for(let i = 0; i<myList.length; i++){
-        console.log(myList[i])
+        // console.log(myList[i])
         if(myList[i].status==false){
           check = " "
         } else {
@@ -178,7 +190,7 @@ function add(task){
 
   let newObject = {name: task, status: false}
   myList.push(newObject);
-  checkMyList.push(false)
+  // checkMyList.push(false)
 }
 
 function remove(num){
@@ -244,7 +256,20 @@ function uncheck(num){
  *
  * @returns {void}
  */
-function quit(){
+async function quit(){
+  
+  let data= JSON.stringify(myList)
+ 
+  const fs = require('fs').promises;
+
+  try{
+  await fs.writeFile('database.json', data,{encoding : 'utf-8'});
+      console.log("saved")
+  }catch(error){
+      console.log("not saved")
+  }
+
+
   console.log('Quitting now, goodbye!')
   process.exit();
 }
