@@ -33,11 +33,14 @@ function startApp(name){
  * @param  {string} text data typed by the user
  * @returns {void}
  */
+
+let myList = ["task1", "task2"]
+
 function onDataReceived(text) {
   
   let name = text.split(" ")
   let secondword = name[1];
-
+  
 
   if (text === 'quit\n' || text ==='exit\n') {
     quit();
@@ -49,6 +52,8 @@ function onDataReceived(text) {
     hola();
   } else if(text === 'help\n'){
     listCommands();
+  }else if(text === 'list\n'){
+    list();
   }
   else{
     unknownCommand(text);
@@ -71,7 +76,7 @@ function unknownCommand(c){
 *prints the list of possible commands
 */
 function listCommands(){
-  console.log(" 'hello'\n 'hola' \n 'quit' or 'exit'");
+  console.log(" 'hello (optional name)'\n 'hola' \n 'quit' or 'exit'");
 }
 
 /**
@@ -95,6 +100,25 @@ function hello(name){
 function hola(){
   console.log('hola espanol amigo!')
 }
+
+/**
+* Comment
+*/
+function list(){
+  // console.log(myList)
+  let index = 1;
+  if(myList.length !=0){
+
+      for(let i = 0; i<myList.length; i++){
+        console.log(`${index}- ${myList[i]}`)
+        index++;
+      }
+
+  } else {
+    console.log("No Tasks added.")
+  }
+}
+
 
 
 /**
