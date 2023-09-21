@@ -74,6 +74,10 @@ function onDataReceived(text) {
     list();
   }
   else if(text === 'add\n' || name[0]==='add'){
+    secondword = ""
+    for(let i=1; i<name.length; i++){
+      secondword += name[i] + " "
+    }
     add(secondword);
   }else if(text === 'remove\n' || name[0]==='remove'){
     if(!secondword){
@@ -150,12 +154,13 @@ function list(){
   if(myList.length !=0){
 
       for(let i = 0; i<myList.length; i++){
-        if(checkMyList[i]==false){
+        console.log(myList[i])
+        if(myList[i].status==false){
           check = " "
         } else {
           check = "✓"
         }
-        console.log(`${index}- [${check}] ${myList[i]}`)
+        console.log(`${index}- [${check}] ${myList[i].name}`)
         index++;
       }
 
@@ -165,10 +170,14 @@ function list(){
 }
 
 function add(task){
+  // console.log(task)
+  task = task.trim()
   if(task == null)  {
     return console.log("Error: please add a task properly: add(task)")
   }
-  myList.push(task);
+
+  let newObject = {name: task, status: false}
+  myList.push(newObject);
   checkMyList.push(false)
 }
 
@@ -180,10 +189,10 @@ function remove(num){
 
   if(num == 0){
       myList.pop();
-      checkMyList.pop();
+      // checkMyList.pop();
   } else if(num){
     myList.splice(num-1,1)
-    checkMyList.splice(num-1,1)
+    // checkMyList.splice(num-1,1)
   }
 }
 
@@ -198,13 +207,13 @@ function edit(number, text){
       mynewtext += text[i]
       mynewtext += ' '
     }
-    myList[myList.length-1] = mynewtext;
+    myList[myList.length-1].name = mynewtext.trim();
   } else if(number && text){
     for(let i =0; i<text.length; i++){
       mynewtext += text[i]
       mynewtext += ' '
     }
-    myList[number-1] = mynewtext;
+    myList[number-1].name = mynewtext.trim();
   } else {
     console.log("check your inputs")
   }
@@ -214,7 +223,8 @@ function check(num){
   if(num>myList.length || num <1){
     console.log("error checking the task...")
   } else {
-    checkMyList[num-1] = true;
+    // checkMyList[num-1] = true;
+    myList[num-1].status = true;
   }
 }
 
@@ -223,7 +233,8 @@ function uncheck(num){
   if(num>myList.length || num <1){
     console.log("error unchecking the task...")
   } else {
-    checkMyList[num-1] = false;
+    // checkMyList[num-1] = false;
+    myList[num-1].status = false;
   }
 }
 
