@@ -40,7 +40,9 @@ function onDataReceived(text) {
   
   let name = text.replace("\n", "")
    name = name.split(" ")
+  //  console.log(name)
   let secondword = name[1];
+  // console.log(secondword)
   
 
 // console.log(name)
@@ -59,6 +61,10 @@ function onDataReceived(text) {
   }
   else if(text === 'add\n' || name[0]==='add'){
     add(secondword);
+  }else if(text === 'remove\n' || name[0]==='remove'){
+    if(!secondword){
+    secondword=0}
+    remove(parseInt(secondword));
   }
   else{
     unknownCommand(text);
@@ -129,6 +135,18 @@ function add(task){
     return console.log("Error: please add a task properly: add(task)")
   }
   myList.push(task);
+}
+
+function remove(num){
+
+  if(num == 0){
+   
+      myList.pop();
+      
+    
+  } else if(num){
+    myList.splice(num-1,1)
+  }
 }
 
 
