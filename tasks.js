@@ -34,14 +34,16 @@ function startApp(name){
  * @returns {void}
  */
 
-let myList = ["task1", "task2"]
+let myList = []
 
 function onDataReceived(text) {
   
-  let name = text.split(" ")
+  let name = text.replace("\n", "")
+   name = name.split(" ")
   let secondword = name[1];
   
 
+// console.log(name)
   if (text === 'quit\n' || text ==='exit\n') {
     quit();
   }
@@ -54,6 +56,9 @@ function onDataReceived(text) {
     listCommands();
   }else if(text === 'list\n'){
     list();
+  }
+  else if(text === 'add\n' || name[0]==='add'){
+    add(secondword);
   }
   else{
     unknownCommand(text);
@@ -115,8 +120,15 @@ function list(){
       }
 
   } else {
-    console.log("No Tasks added.")
+    console.log("No Tasks.")
   }
+}
+
+function add(task){
+  if(task == null)  {
+    return console.log("Error: please add a task properly: add(task)")
+  }
+  myList.push(task);
 }
 
 
